@@ -1,9 +1,11 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR . './google-api-php-client/src');
-require_once "./google-api-php-client/src/Google_Client.php";
-require_once "./google-api-php-client/src/contrib/Google_AnalyticsService.php";
+set_include_path(get_include_path() . PATH_SEPARATOR . './lib/google-api-php-client/src');
+require_once "./lib/google-api-php-client/src/Google_Client.php";
+require_once "./lib/google-api-php-client/src/contrib/Google_AnalyticsService.php";
 
+function getGoogleAnalyticsData($startDate, $endDate)
+{
 $client = new Google_Client();
 $client->setApplicationName('Durham University Google Analytics Service');
 
@@ -28,6 +30,7 @@ $optParams = array(
       'dimensions' => 'ga:city',
       'sort' => '-ga:visits',
       'filters' => 'ga:country==United Kingdom;ga:city!=(not set)');
-$x = $service->data_ga->get('ga:7685379', '2013-09-10', '2013-09-10', 'ga:visits', $optParams);
-print(json_encode($x));
+$x = $service->data_ga->get('ga:7685379', $startDate, $endDate, 'ga:visits', $optParams);
+return json_encode($x);
+}
 ?>

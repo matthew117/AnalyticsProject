@@ -3,16 +3,63 @@ body
   font-family: 'Helvetica Neue', 'DINPro-Regular', Helvetica, Verdana, sans-serif;
 }
 
+#content
+{
+    margin: 0 auto;
+    width: 900px;
+}
+
+#query-ui
+{
+  background: #ddd;
+  margin-bottom: 25px;
+}
+
+#query-ui td
+{
+  padding: 5px;
+}
+
+#query-banner
+{
+  color: white;
+  background: #333;
+  padding: 6px 12px;
+}
+
+#query-banner a
+{
+  color: white;
+  text-decoration: none;
+}
+
+#query-banner ul
+{
+  margin-top: 3px;
+  float: right;
+}
+
+#query-banner ul li
+{
+  border-left: solid white 1px;
+  display: inline;
+  padding-left: 17px;
+  padding-right: 12px;
+}
+
+#query-banner ul li:first-child
+{
+  border: none;
+}
+
 #cities
 {
   padding: 2px;
-  width: 900px;
-  margin: 0 auto;
 }
 
 .city
 {
-  margin: 0px 0px 50px 0px;
+  margin-bottom: 50px;
 }
 
 .city-banner
