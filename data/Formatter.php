@@ -3,7 +3,7 @@
 require_once './model/City.php';
 require_once './model/School.php';
 
-function generateHTML($data)
+function generateHTML($data, $startDate, $endDate)
 {
 $text = <<<HTML
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ $text = <<<HTML
         </div>
         <form action=".">
         <table>
-          <tr><td>Time</td><td><input type="date" name="start-date"></td><td><input type="date" name="end-date"></td></tr>
+          <tr><td>Time</td><td><input type="date" name="start-date" value="$startDate"></td><td><input type="date" name="end-date" value="$endDate"></td></tr>
         </table>
         <input type="submit" value="Submit" />
         </form>

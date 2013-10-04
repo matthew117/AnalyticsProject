@@ -1,6 +1,6 @@
 <?php
 
-function getData($startDate, $endDate)
+function getData($startDate, $endDate, $url)
 {
   require_once 'model/School.php';
   require_once 'model/City.php';
@@ -8,8 +8,8 @@ function getData($startDate, $endDate)
   
   $now = getdate();
   
-  if (!isset($startDate)) $startDate = $now['year'] . '-' . ($now['mon'] > 9 ? $now['mon'] : '0'.$now['mon']) . '-' . ($now['mday'] > 9 ? $now['mday'] : '0'.$now['mday']);
-  if (!isset($endDate)) $endDate = $now['year'] . '-' . ($now['mon'] > 9 ? $now['mon'] : '0'.$now['mon']) . '-' . ($now['mday'] > 9 ? $now['mday'] : '0'.$now['mday']);
+  if (!isset($startDate) || strlen($startDate) < 10) $startDate = $now['year'] . '-' . ($now['mon'] > 9 ? $now['mon'] : '0'.$now['mon']) . '-' . ($now['mday'] > 9 ? $now['mday'] : '0'.$now['mday']);
+  if (!isset($endDate) || strlen($endDate) < 10) $endDate = $now['year'] . '-' . ($now['mon'] > 9 ? $now['mon'] : '0'.$now['mon']) . '-' . ($now['mday'] > 9 ? $now['mday'] : '0'.$now['mday']);
 
   $schools = array();
 
@@ -54,7 +54,7 @@ function getData($startDate, $endDate)
 
   $cities = array();
 
-  $ga_data_str = getGoogleAnalyticsData($startDate, $endDate);
+  $ga_data_str = getGoogleAnalyticsData($startDate, $endDate, $url);
   $ga_data = json_decode($ga_data_str);
 
   for ($i = 0; $i < count($ga_data->rows); $i++)
