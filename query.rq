@@ -1,0 +1,36 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX school: <http://education.data.gov.uk/def/school/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT DISTINCT ?uniqueReferenceNumber ?establishmentName ?email ?address1
+       ?address2 ?town ?postcode ?lat ?long
+       ?websiteAddress ?specialismLabel
+WHERE
+{
+  ?school school:establishmentStatus school:EstablishmentStatus_Open .
+  ?school school:phaseOfEducation ?phaseOfEducation .
+  ?phaseOfEducation rdfs:label "Secondary" .
+
+  ?school school:uniqueReferenceNumber ?uniqueReferenceNumber .
+  ?school school:establishmentName ?establishmentName .
+  ?school school:SCUpreferredemail ?email .
+
+  ?school school:address ?address .
+  ?address school:address1 ?address1 .
+  OPTIONAL { ?address school:address2 ?address2 . }
+  ?address school:town ?town .
+  ?address school:postcode ?postcode .
+  ?school geo:lat ?lat .
+  ?school geo:long ?long .
+  
+  #OPTIONAL { ?school school:SCUAlternativeEmail ?altEmail . }
+  #OPTIONAL { ?school school:officialSixthForm ?officialSixthForm . }
+  OPTIONAL { ?school school:websiteAddress ?websiteAddress . }
+  OPTIONAL
+  {
+    ?school school:mainSpecialism ?specialism .
+    ?specialism rdfs:label ?specialismLabel .
+  }
+}
+ORDER BY ?uniqueReferenceNumber
